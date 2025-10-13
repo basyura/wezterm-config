@@ -103,6 +103,11 @@ merge_config({
     { key = '[', mods = 'CTRL', action = wezterm.action.ScrollByLine(-5) },
     -- Ctrl+] で 1 行下にスクロール
     { key = ']', mods = 'CTRL', action = wezterm.action.ScrollByLine(5) },
+
+    -- Ctrl+X, Ctrl+V で右に分割（縦割り）
+    { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    -- Ctrl+X, Ctrl+H で下に分割（横割り）
+    { key = 'b', mods = 'LEADER|CTRL', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
     -- ペイン移動
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Down' },
