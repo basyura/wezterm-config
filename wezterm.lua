@@ -106,13 +106,17 @@ merge_config({
 
     -- Ctrl+X, Ctrl+V で右に分割（縦割り）
     { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    -- Ctrl+X, Ctrl+H で下に分割（横割り）
-    { key = 'b', mods = 'LEADER|CTRL', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
     -- ペイン移動
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Up' },
     { key = 'l', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Right' },
+    -- Ctrl-X, Ctrl-B → ^X^B を送信
+    { key = 'b', mods = 'LEADER|CTRL', action = act.SendString('\x18\x02') },
+    -- Ctrl-X, Ctrl-A → ^X^A を送信
+    { key = 'a', mods = 'LEADER|CTRL', action = act.SendString('\x18\x01') },
+    -- Ctrl-X, Ctrl-S → ^X^S を送信
+    { key = 's', mods = 'LEADER|CTRL', action = act.SendString('\x18\x13') },
   },
 })
 
