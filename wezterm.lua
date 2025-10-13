@@ -9,6 +9,13 @@ local function merge_config(source)
   end
 end
 
+-- vim / nvim（tmux 経由も想定）を判定
+local function is_vim_like(pane)
+  local p = pane:get_foreground_process_name() or ''
+  local base = (p:match('([^/\\]+)$') or p):lower()  -- フルパス → basename → 小文字化
+  return base == 'vim' or base == 'nvim'
+end
+
 -- ime
 merge_config({
   use_ime = true,
@@ -56,21 +63,17 @@ merge_config({
 })
 
 -- タブ
-config.tab_max_width = 25
+merge_config({
+  tab_max_width = 50,
+})
+
 wezterm.on('format-tab-title', function(tab)
   local title = tab.active_pane.title
-  local min_width = 20
+  local min_width = 30
   -- タイトルをスペースで埋めて右側を切り詰める
   local padded = title .. string.rep(' ', min_width)
   return ' ' .. wezterm.truncate_right(padded, min_width) .. ' '
 end)
-
--- vim / nvim（tmux 経由も想定）を判定
-local function is_vim_like(pane)
-  local p = pane:get_foreground_process_name() or ''
-  local base = (p:match('([^/\\]+)$') or p):lower()  -- フルパス → basename → 小文字化
-  return base == 'vim' or base == 'nvim'
-end
 
 -- Ctrl+V のスマート動作
 wezterm.on('smart-paste', function(win, pane)
