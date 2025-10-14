@@ -32,6 +32,11 @@ merge_config({
   })
 })
 
+-- term
+merge_config({
+  audible_bell = "Disabled",
+})
+
 -- color
 merge_config({
   color_scheme = "Dracula+",
