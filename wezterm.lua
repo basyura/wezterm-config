@@ -146,4 +146,16 @@ merge_config({
   },
 })
 
+-- mouse
+merge_config({
+  mouse_bindings = {
+    -- 既存設定を維持しつつ右クリックで貼り付け
+    {
+      event = { Down = { streak = 1, button = 'Right' } },
+      mods = 'NONE',
+      action = wezterm.action.PasteFrom 'Clipboard',
+    },
+  },
+})
+
 return config
