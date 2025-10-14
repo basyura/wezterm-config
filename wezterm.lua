@@ -17,6 +17,10 @@ local function is_vim_like(pane)
   return base == 'vim' or base == 'nvim'
 end
 
+if isWindows then
+  config.default_prog = { 'C:/dev/git-sdk/usr/bin/zsh.exe', '-l' }
+end
+
 -- ime
 merge_config({
   use_ime = true,
