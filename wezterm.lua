@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 local act = wezterm.action
+local isWindows = wezterm.target_triple:find("windows") ~= nil
 
 -- 設定をマージするユーティリティ関数
 local function merge_config(source)
@@ -22,19 +23,35 @@ merge_config({
   macos_forward_to_ime_modifier_mask = 'SHIFT|CTRL',
 })
 
--- font
-merge_config({
-  font_size = 13,
-  line_height = 1.2,
-  font = wezterm.font_with_fallback({
-    'Monaco',
-    'HackGen',
+if isWindows then
+  merge_config({
+    font_size = 12,
+    line_height = 1.2,
+    font = wezterm.font_with_fallback({
+      'HackGen',
+      "Cascadia Code PL",
+      "Meiryo",
+      "MS Gothic",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+    })
   })
-})
+else
+  -- mac
+  merge_config({
+    font_size = 13,
+    line_height = 1.2,
+    font = wezterm.font_with_fallback({
+      'Monaco',
+      'HackGen',
+    })
+  })
+end
 
 -- term
 merge_config({
   audible_bell = "Disabled",
+  warn_about_missing_glyphs = false, -- font が無い場合の警告
 })
 
 -- color
