@@ -186,4 +186,24 @@ merge_config({
   },
 })
 
+-- ローカル上書き設定の読み込み（ホーム直下の .wezterm.local.lua を対象）
+do
+  local home = wezterm.home_dir or os.getenv('HOME') or os.getenv('USERPROFILE') or '.'
+  home = home:gsub('\\', '/')
+  local local_path = home .. '/.wezterm.local.lua'
+
+  local f = io.open(local_path, 'r')
+  if f ~= nil then
+    f:close()
+    local ok, ret = pcall(dofile, local_path)
+    if ok then
+      if type(ret) == 'table' then
+        merge_config(ret)
+      elseif type(ret) == 'function' then
+        pcall(ret, config, wezterm, merge_config)
+      end
+    end
+  end
+end
+
 return config
