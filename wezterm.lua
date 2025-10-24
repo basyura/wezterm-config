@@ -17,8 +17,24 @@ local function is_vim_like(pane)
   return base == 'vim' or base == 'nvim'
 end
 
+-- ファイル存在チェック
+local function file_exists(path)
+  local f = io.open(path, 'r')
+  if f ~= nil then f:close() return true end
+  return false
+end
+
 if isWindows then
-  config.default_prog = { 'C:/dev/git-sdk/usr/bin/zsh.exe', '-l' }
+  local zsh64    = 'C:/git-sdk-64/usr/bin/zsh.exe'
+  local zshDev2  = 'C:/dev/gitsdk/usr/bin/zsh.exe'
+  local zshDev   = 'C:/dev/git-sdk/usr/bin/zsh.exe'
+  local zsh = zshDev
+  if file_exists(zsh64) then
+    zsh = zsh64
+  elseif file_exists(zshDev2) then
+    zsh = zshDev2
+  end
+  config.default_prog = { zsh, '-l' }
 end
 
 -- ime
