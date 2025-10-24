@@ -24,17 +24,29 @@ local function file_exists(path)
   return false
 end
 
-if isWindows then
-  local zsh64    = 'C:/git-sdk-64/usr/bin/zsh.exe'
-  local zshDev2  = 'C:/dev/gitsdk/usr/bin/zsh.exe'
-  local zshDev   = 'C:/dev/git-sdk/usr/bin/zsh.exe'
-  local zsh = zshDev
-  if file_exists(zsh64) then
-    zsh = zsh64
-  elseif file_exists(zshDev2) then
-    zsh = zshDev2
+-- Windows 用: 最初に見つかった zsh を返す
+local function first_existing_path(paths)
+  for _, p in ipairs(paths) do
+    if file_exists(p) then
+      return p
+    end
   end
-  config.default_prog = { zsh, '-l' }
+  return nil
+end
+
+local function windows_default_prog()
+  local candidates = {
+    'C:/git-sdk-64/usr/bin/zsh.exe',
+    'C:/dev/gitsdk/usr/bin/zsh.exe',
+    'C:/dev/git-sdk/usr/bin/zsh.exe',
+  }
+  -- どれも無ければ最後の候補（従来の既定と同等）
+  local zsh = first_existing_path(candidates) or candidates[#candidates]
+  return { zsh, '-l' }
+end
+
+if isWindows then
+  config.default_prog = windows_default_prog()
 end
 
 -- ime
