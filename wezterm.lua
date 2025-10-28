@@ -62,7 +62,7 @@ if isWindows then
     font = wezterm.font_with_fallback({
       { family = 'UD Digi Kyokasho N-R', weight = 'Bold'},
       "Cascadia Code PL",
-      "Meiryo",
+      "HackGen",
       "MS Gothic",
       "Segoe UI Emoji",
       "Segoe UI Symbol",
