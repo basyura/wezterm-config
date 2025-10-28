@@ -13,7 +13,7 @@ end
 -- vim / nvim（tmux 経由も想定）を判定
 local function is_vim_like(pane)
   local p = pane:get_foreground_process_name() or ''
-  local base = (p:match('([^/\\]+)$') or p):lower()  -- フルパス → basename → 小文字化
+  local base = (p:match('([^/\\]+)$') or p):lower() -- フルパス → basename → 小文字化
   return base == 'vim' or base == 'nvim'
 end
 
@@ -57,10 +57,10 @@ merge_config({
 
 if isWindows then
   merge_config({
-    font_size = 12,
+    font_size = 11,
     line_height = 1.2,
     font = wezterm.font_with_fallback({
-      'HackGen',
+      { family = 'UD Digi Kyokasho N-R', weight = 'Bold'},
       "Cascadia Code PL",
       "Meiryo",
       "MS Gothic",
@@ -90,8 +90,9 @@ merge_config({
 merge_config({
   color_scheme = "Dracula+",
   colors = {
-    cursor_bg = 'orange',  -- カーソル本体の色
-    cursor_fg = 'black',  -- カーソル上の文字色（反転色）
+    foreground = '#e0e0e0',
+    cursor_bg = 'orange', -- カーソル本体の色
+    cursor_fg = 'black', -- カーソル上の文字色（反転色）
     cursor_border = 'orange', -- カーソル枠線色（ブロックカーソル用）
     tab_bar = {
       active_tab = {
@@ -145,7 +146,7 @@ merge_config({
   leader = { key = 'x', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = {
     -- 貼り付け
-    { key = 'v', mods = 'CTRL',  action = act.EmitEvent 'smart-paste' }, -- Ctrl+V
+    { key = 'v', mods = 'CTRL', action = act.EmitEvent 'smart-paste' }, -- Ctrl+V
     { key = 'v', mods = 'SUPER', action = act.PasteFrom 'Clipboard' }, -- Cmd+V
     -- コマンドパレット
     { key = 'p', mods = 'LEADER|CTRL', action = act.ActivateCommandPalette },
@@ -177,11 +178,27 @@ merge_config({
 -- mouse
 merge_config({
   mouse_bindings = {
-    -- 既存設定を維持しつつ右クリックで貼り付け
+    -- 左クリックで選択後に自動コピー
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = act.CompleteSelection 'Clipboard',
+    },
+    {
+      event = { Up = { streak = 2, button = 'Left' } },
+      mods = 'NONE',
+      action = act.CompleteSelection 'Clipboard',
+    },
+    {
+      event = { Up = { streak = 3, button = 'Left' } },
+      mods = 'NONE',
+      action = act.CompleteSelection 'Clipboard',
+    },
+    -- 右クリックで貼り付け
     {
       event = { Down = { streak = 1, button = 'Right' } },
       mods = 'NONE',
-      action = wezterm.action.PasteFrom 'Clipboard',
+      action = act.PasteFrom 'Clipboard',
     },
   },
 })
