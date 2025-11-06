@@ -47,6 +47,27 @@ end
 
 if isWindows then
   config.default_prog = windows_default_prog()
+  -- Windows: PowerShell 起動用のランチメニュー
+  local launch_menu = {}
+  -- PowerShell 7 (pwsh) があれば追加
+  local pwsh = 'C:/Program Files/PowerShell/7/pwsh.exe'
+  if file_exists(pwsh) then
+    table.insert(launch_menu, {
+      label = 'PowerShell 7',
+      args = { pwsh, '-NoLogo' },
+    })
+  end
+  -- Windows PowerShell (5.x)
+  local powershell = 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe'
+  if file_exists(powershell) then
+    table.insert(launch_menu, {
+      label = 'Windows PowerShell',
+      args = { powershell, '-NoLogo' },
+    })
+  end
+  if #launch_menu > 0 then
+    merge_config({ launch_menu = launch_menu })
+  end
 end
 
 -- ime
@@ -177,6 +198,8 @@ merge_config({
     { key = 'a', mods = 'LEADER|CTRL', action = act.SendString('\x18\x01') },
     -- Ctrl-X, Ctrl-S → ^X^S を送信
     { key = 's', mods = 'LEADER|CTRL', action = act.SendString('\x18\x13') },
+    -- Ctrl-X, Ctrl-Space → ランチャー（Launch Menu から PowerShell を選択可）
+    { key = 'Space', mods = 'LEADER|CTRL', action = act.ShowLauncher },
   },
 })
 
