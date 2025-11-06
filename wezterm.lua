@@ -122,6 +122,11 @@ merge_config({
   tab_max_width = 50,
 })
 
+-- ウインドウタイトル
+wezterm.on("format-window-title", function(tab, pane, tabs, panes, cfg)
+  return "wezterm"
+end)
+
 wezterm.on('format-tab-title', function(tab)
   local title = tab.active_pane.title
   local min_width = 30
