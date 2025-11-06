@@ -4,9 +4,31 @@ local act = wezterm.action
 local isWindows = wezterm.target_triple:find("windows") ~= nil
 
 -- 設定をマージするユーティリティ関数
+-- テーブル同士の場合は「既に存在するキーのみ」を再帰的に上書きする。
+-- 例: colors = { cursor_bg = 'orange' } が来た場合、config.colors の
+-- 既存キー cursor_bg だけ変更し、他のサブキーは保持する。
 local function merge_config(source)
+  local function merge_existing(dst, src)
+    for k, v in pairs(src) do
+      local has = dst[k] ~= nil
+      if has then
+        if type(v) == 'table' and type(dst[k]) == 'table' then
+          merge_existing(dst[k], v)
+        else
+          dst[k] = v
+        end
+      end
+      -- dst に存在しないキーは無視（新規追加しない）
+    end
+  end
+
   for k, v in pairs(source) do
-    config[k] = v
+    if type(v) == 'table' and type(config[k]) == 'table' then
+      merge_existing(config[k], v)
+    else
+      -- テーブル以外、または既存がテーブルでない場合はそのまま上書き
+      config[k] = v
+    end
   end
 end
 
