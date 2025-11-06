@@ -180,6 +180,10 @@ merge_config({
     { key = '.', mods = 'CTRL', action = wezterm.action.ActivateTabRelative(1) },
     -- Ctrl+, → 前のタブへ
     { key = ',', mods = 'CTRL', action = wezterm.action.ActivateTabRelative(-1) },
+    -- Ctrl+Shift+> → タブを右へ移動
+    { key = '>', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(1) },
+    -- Ctrl+Shift+< → タブを左へ移動
+    { key = '<', mods = 'CTRL|SHIFT', action = act.MoveTabRelative(-1) },
     -- Ctrl+[ で 1 行上にスクロール
     { key = '[', mods = 'CTRL', action = wezterm.action.ScrollByLine(-5) },
     -- Ctrl+] で 1 行下にスクロール
