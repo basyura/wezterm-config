@@ -127,6 +127,12 @@ end
 merge_config({
   audible_bell = "Disabled",
   warn_about_missing_glyphs = false, -- font が無い場合の警告
+  skip_close_confirmation_for_processes_named = {
+    "zsh",
+    "zsh.exe",
+    "cmd.exe",
+    "powershell.exe",
+  },
 })
 
 -- color
