@@ -234,6 +234,8 @@ merge_config({
     { key = 'a', mods = 'LEADER|CTRL', action = act.SendString('\x18\x01') },
     -- Ctrl-X, Ctrl-S → ^X^S を送信
     { key = 's', mods = 'LEADER|CTRL', action = act.SendString('\x18\x13') },
+    -- Ctrl-X, Ctrl-N で 新規タブを開く
+    { key = 'n', mods = 'LEADER|CTRL', action = act.SpawnTab 'CurrentPaneDomain' },
     -- Ctrl-X, Ctrl-Space → ランチャー（Launch Menu から PowerShell を選択可）
     { key = 'Space', mods = 'LEADER|CTRL', action = act.ShowLauncher },
   },
