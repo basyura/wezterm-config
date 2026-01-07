@@ -138,6 +138,10 @@ merge_config({
 -- color
 merge_config({
   color_scheme = "Dracula+",
+  inactive_pane_hsb = {
+    brightness = 1.0,
+    saturation = 1.0,
+  },
   colors = {
     foreground = '#e0e0e0',
     cursor_bg = 'orange', -- カーソル本体の色
