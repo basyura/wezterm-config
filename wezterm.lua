@@ -223,8 +223,6 @@ merge_config({
 
     -- Ctrl+X, Ctrl+V で右に分割（縦割り）
     { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    -- Tab で アクティブな pane を切り替え
-    { key = 'Tab', mods = 'NONE', action = act.ActivatePaneDirection 'Next' },
     -- ペイン移動
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Down' },
