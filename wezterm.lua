@@ -224,6 +224,7 @@ merge_config({
     -- Ctrl+X, Ctrl+V で右に分割（縦割り）
     { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     -- ペイン移動
+    { key = '@', mods = 'CTRL', action = act.ActivatePaneDirection 'Next' },
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Up' },
