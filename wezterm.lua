@@ -144,9 +144,9 @@ merge_config({
   },
   colors = {
     foreground = '#e0e0e0',
-    cursor_bg = 'orange', -- カーソル本体の色
-    cursor_fg = 'black', -- カーソル上の文字色（反転色）
     cursor_border = 'orange', -- カーソル枠線色（ブロックカーソル用）
+    cursor_fg = 'black', -- カーソル上の文字色（反転色）
+    cursor_bg = 'orange', -- カーソル本体の色
     tab_bar = {
       active_tab = {
         bg_color = '#696969',
@@ -223,6 +223,8 @@ merge_config({
 
     -- Ctrl+X, Ctrl+V で右に分割（縦割り）
     { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    -- Tab で アクティブな pane を切り替え
+    { key = 'Tab', mods = 'NONE', action = act.ActivatePaneDirection 'Next' },
     -- ペイン移動
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
     { key = 'j', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Down' },
