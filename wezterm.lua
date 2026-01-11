@@ -144,9 +144,10 @@ merge_config({
   },
   colors = {
     foreground = '#e0e0e0',
-    cursor_border = 'orange', -- カーソル枠線色（ブロックカーソル用）
+    cursor_border = 'black', -- カーソル枠線色（ブロックカーソル用）
     cursor_fg = 'black', -- カーソル上の文字色（反転色）
     cursor_bg = 'orange', -- カーソル本体の色
+    split = 'darkgray', -- ペイン枠線の色
     tab_bar = {
       active_tab = {
         bg_color = '#696969',
