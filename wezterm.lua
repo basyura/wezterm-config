@@ -109,7 +109,8 @@ if isWindows then
       "MS Gothic",
       "Segoe UI Emoji",
       "Segoe UI Symbol",
-    })
+    }),
+    window_decorations = "INTEGRATED_BUTTONS",
   })
 else
   -- mac
