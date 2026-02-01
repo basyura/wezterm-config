@@ -224,7 +224,7 @@ merge_config({
     { key = ']', mods = 'CTRL', action = wezterm.action.ScrollByLine(5) },
 
     -- Ctrl+X, Ctrl+V で右に分割（縦割り）
-    { key = 'v', mods = 'LEADER|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    { key = 'v', mods = 'LEADER|CTRL', action = act.ActivateCopyMode },
     -- ペイン移動
     { key = '@', mods = 'CTRL', action = act.ActivatePaneDirection 'Next' },
     { key = 'h', mods = 'LEADER|CTRL', action = act.ActivatePaneDirection 'Left' },
