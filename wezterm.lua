@@ -269,6 +269,11 @@ merge_config({
       mods = 'NONE',
       action = act.PasteFrom 'Clipboard',
     },
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = wezterm.action.OpenLinkAtMouseCursor,
+    },
   },
 })
 
