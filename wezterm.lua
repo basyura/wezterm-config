@@ -247,12 +247,13 @@ merge_config({
 -- mouse
 merge_config({
   mouse_bindings = {
-    -- 左クリックで選択後に自動コピー
+    -- 左クリックで URL を開く。選択中の場合はクリップボードへコピー
     {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'NONE',
-      action = act.CompleteSelection 'Clipboard',
+      action = act.CompleteSelectionOrOpenLinkAtMouseCursor 'Clipboard',
     },
+    -- ダブルクリック/トリプルクリックで選択後に自動コピー
     {
       event = { Up = { streak = 2, button = 'Left' } },
       mods = 'NONE',
@@ -269,6 +270,7 @@ merge_config({
       mods = 'NONE',
       action = act.PasteFrom 'Clipboard',
     },
+    -- 明示的に URL を開きたい場合の補助操作
     {
       event = { Up = { streak = 1, button = 'Left' } },
       mods = 'CTRL',
