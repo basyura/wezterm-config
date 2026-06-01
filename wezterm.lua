@@ -271,7 +271,7 @@ merge_config({
     },
     {
       event = { Up = { streak = 1, button = 'Left' } },
-      mods = 'NONE',
+      mods = 'CTRL',
       action = wezterm.action.OpenLinkAtMouseCursor,
     },
   },
