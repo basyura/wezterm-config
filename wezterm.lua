@@ -110,7 +110,7 @@ if isWindows then
       "Segoe UI Emoji",
       "Segoe UI Symbol",
     }),
-    window_decorations = "INTEGRATED_BUTTONS",
+    -- window_decorations = "INTEGRATED_BUTTONS",
   })
 else
   -- mac
@@ -241,6 +241,8 @@ merge_config({
     { key = 'n', mods = 'LEADER|CTRL', action = act.SpawnTab 'CurrentPaneDomain' },
     -- Ctrl-X, Ctrl-Space → ランチャー（Launch Menu から PowerShell を選択可）
     { key = 'Space', mods = 'LEADER|CTRL', action = act.ShowLauncher },
+    -- フルスクリーンを解除
+    { key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment, },
   },
 })
 
